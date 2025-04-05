@@ -1,7 +1,7 @@
 # 👋 Hi there, I'm Wsh7Ash
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Wsh7Ash&show_icons=true&theme=radical" alt="Wsh7Ash's GitHub stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Wsh7Ash&show_icons=true&theme=github_dark" alt="Wsh7Ash's GitHub stats" />
 </div>
 
 ## 🚀 About Me
@@ -17,12 +17,12 @@ I'm a passionate developer with expertise in:
 
 ## 📊 GitHub Stats
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Wsh7Ash&theme=black" alt="Wsh7Ash's streak stats" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Wsh7Ash&theme=github_dark" alt="Wsh7Ash's streak stats" />
 </div>
 
 ## 🛠️ Skills & Tools
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=cpp,py,java,js,unity,unreal,git,github" alt="Skills" />
+  <img src="https://skillicons.dev/icons?i=cpp,py,java,js,lua,unreal,neovim,visualstudio,vscode,git,github" alt="Skills" />
 </div>
 
 ## 🌟 Featured Projects
@@ -34,7 +34,7 @@ I'm a passionate developer with expertise in:
 
 ## 📈 Contribution Graph
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Wsh7Ash&theme=radical" alt="Wsh7Ash's contribution graph" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Wsh7Ash&theme=github_dark" alt="Wsh7Ash's contribution graph" />
 </div>
 
 ## 📫 How to reach me
