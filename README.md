@@ -34,7 +34,7 @@ I'm a passionate developer with expertise in:
 
 ## 📈 Contribution Graph
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Wsh7Ash&theme=shadow_red" alt="Wsh7Ash's contribution graph" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Wsh7Ash&theme=high-contrast" alt="Wsh7Ash's contribution graph" />
 </div>
 
 ## 📫 How to reach me
