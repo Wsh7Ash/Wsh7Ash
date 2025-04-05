@@ -17,7 +17,7 @@ I'm a passionate developer with expertise in:
 
 ## 📊 GitHub Stats
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Wsh7Ash&theme=radical" alt="Wsh7Ash's streak stats" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Wsh7Ash&theme=black" alt="Wsh7Ash's streak stats" />
 </div>
 
 ## 🛠️ Skills & Tools
