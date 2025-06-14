@@ -25,12 +25,6 @@ I'm a passionate developer with expertise in:
   <img src="https://skillicons.dev/icons?i=cpp,py,java,js,lua,unreal,neovim,visualstudio,vscode,git,github" alt="Skills" />
 </div>
 
-## 🌟 Featured Projects
-- [ctbpR](https://github.com/Wsh7Ash/ctbpR) - C++ project
-- [watermarkofwin](https://github.com/Wsh7Ash/watermarkofwin) - Batchfile utility
-- [LEETCODE](https://github.com/Wsh7Ash/LEETCODE) - C++ solutions
-- [WSH](https://github.com/Wsh7Ash/WSH) - TypeScript project
-- [gui](https://github.com/Wsh7Ash/gui) - C++ GUI application
 
 ## 📈 Contribution Graph
 <div align="center">
