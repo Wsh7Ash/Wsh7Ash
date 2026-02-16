@@ -1,4 +1,4 @@
-# 👋 Hi there, I'm Wsh7Ash
+
 
 <div align="center">
   
@@ -7,7 +7,7 @@
 </div>
 
 ## 🚀 About Me
-I'm a passionate full-stack developer and security enthusiast with a deep love for low-level programming and game development. I enjoy building robust applications, exploring system internals, and creating immersive gaming experiences.
+I'm a SkillIssue dev!!.
 
 ### 🔥 What I'm passionate about:
 - **Systems Programming**: Building efficient, low-level applications with C++ and Assembly
