@@ -1,6 +1,6 @@
 node_modules/
 package-lock.json
-picoctf-stats.json
+!picoctf-stats.json
 *.svg
 !metrics.plugin.isocalendar.fullyear.clean.svg
 !metrics.plugin.languages.clean.svg
