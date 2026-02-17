@@ -12,24 +12,41 @@ async function scrapePicoCTF(username) {
         console.log(`[picoctf-scraper] Navigating to profile: https://play.picoctf.org/users/${username}`);
         await page.goto(`https://play.picoctf.org/users/${username}`, { waitUntil: 'networkidle2' });
 
-        // Wait for the main stats to appear. 
-        // We search for elements containing keywords like "Score" or "Rank"
+        // Give it plenty of time to load dynamic content
+        await new Promise(r => setTimeout(r, 10000));
+
         const stats = await page.evaluate(() => {
-            const getStat = (text) => {
-                const el = Array.from(document.querySelectorAll('div, span, p, h3, h4'))
-                    .find(e => e.textContent.includes(text));
-                if (!el) return null;
+            const results = {};
+            const allElements = Array.from(document.querySelectorAll('*'));
 
-                // Usually the number is in the next sibling or parent's child
-                const parent = el.parentElement;
-                return parent ? parent.textContent.replace(text, '').trim() : null;
+            const findValueForLabel = (label) => {
+                const labelEl = allElements.find(el => el.innerText && el.innerText.trim() === label);
+                if (!labelEl) return null;
+
+                // Try parent's children logic
+                const parent = labelEl.parentElement;
+                if (!parent) return null;
+
+                // Find a sibling that looks like a number
+                const siblings = Array.from(parent.children);
+                for (const sib of siblings) {
+                    if (sib === labelEl) continue;
+                    const text = sib.innerText.trim();
+                    if (text && /^[#\d,]+$/.test(text)) return text;
+                }
+
+                // Fallback: search in parent's text
+                const pt = parent.innerText.replace(label, '').trim();
+                if (pt && /^[#\d,]+$/.test(pt.split('\n')[0])) return pt.split('\n')[0];
+
+                return null;
             };
 
-            return {
-                score: getStat('Score'),
-                rank: getStat('World Rank'),
-                solved: getStat('Solved')
-            };
+            results.score = findValueForLabel('Score');
+            results.rank = findValueForLabel('World Rank');
+            results.solved = findValueForLabel('Solved');
+
+            return results;
         });
 
         console.log('[picoctf-scraper] Scraped stats:', stats);
@@ -38,7 +55,7 @@ async function scrapePicoCTF(username) {
             fs.writeFileSync('picoctf-stats.json', JSON.stringify(stats, null, 2));
             console.log('[picoctf-scraper] Wrote picoctf-stats.json');
         } else {
-            console.error('[picoctf-scraper] Could not find stats on page.');
+            console.error('[picoctf-scraper] Could not find stats on page. Check if elements changed.');
         }
 
     } catch (error) {
