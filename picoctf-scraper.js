@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 async function scrapePicoCTF(username) {
+    console.log(`[picoctf-scraper] Starting scrape for user: ${username}`);
     const browser = await puppeteer.launch({
         headless: "new",
         args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -9,57 +10,72 @@ async function scrapePicoCTF(username) {
     const page = await browser.newPage();
 
     try {
-        console.log(`[picoctf-scraper] Navigating to profile: https://play.picoctf.org/users/${username}`);
-        await page.goto(`https://play.picoctf.org/users/${username}`, { waitUntil: 'networkidle2' });
+        const url = `https://play.picoctf.org/users/${username}`;
+        console.log(`[picoctf-scraper] Navigating to: ${url}`);
 
-        // Give it plenty of time to load dynamic content
-        await new Promise(r => setTimeout(r, 10000));
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
-        const stats = await page.evaluate(() => {
-            const results = {};
-            const allElements = Array.from(document.querySelectorAll('*'));
+        // Wait for the dynamic content to settle
+        console.log(`[picoctf-scraper] Waiting 15s for content...`);
+        await new Promise(r => setTimeout(r, 15000));
 
-            const findValueForLabel = (label) => {
-                const labelEl = allElements.find(el => el.innerText && el.innerText.trim() === label);
-                if (!labelEl) return null;
+        const result = await page.evaluate(() => {
+            const stats = { score: null, rank: null, solved: null };
+            const body = document.body;
+            const text = body.innerText;
 
-                // Try parent's children logic
-                const parent = labelEl.parentElement;
-                if (!parent) return null;
+            // Strategy 1: Look for specific labels and their neighbors
+            const findVal = (label) => {
+                const el = Array.from(document.querySelectorAll('*'))
+                    .find(e => e.children.length === 0 && e.innerText && e.innerText.trim() === label);
+                if (!el) return null;
 
-                // Find a sibling that looks like a number
-                const siblings = Array.from(parent.children);
-                for (const sib of siblings) {
-                    if (sib === labelEl) continue;
-                    const text = sib.innerText.trim();
-                    if (text && /^[#\d,]+$/.test(text)) return text;
-                }
+                // Check siblings or parent's other children
+                let p = el.parentElement;
+                if (!p) return null;
 
-                // Fallback: search in parent's text
-                const pt = parent.innerText.replace(label, '').trim();
-                if (pt && /^[#\d,]+$/.test(pt.split('\n')[0])) return pt.split('\n')[0];
+                let val = Array.from(p.innerText.split('\n'))
+                    .map(t => t.trim())
+                    .filter(t => t && t !== label && /^[#\d,]+$/.test(t))[0];
 
-                return null;
+                return val || null;
             };
 
-            results.score = findValueForLabel('Score');
-            results.rank = findValueForLabel('World Rank');
-            results.solved = findValueForLabel('Solved');
+            stats.score = findVal('Score');
+            stats.rank = findVal('World Rank');
+            stats.solved = findVal('Solved');
 
-            return results;
+            // Strategy 2: Regex fallback
+            if (!stats.score) {
+                const m = text.match(/Score\s*\n*\s*([\d,]+)/i);
+                if (m) stats.score = m[1].trim();
+            }
+            if (!stats.rank) {
+                const m = text.match(/World Rank\s*\n*\s*(#[\d,]+)/i);
+                if (m) stats.rank = m[1].trim();
+            }
+            if (!stats.solved) {
+                const m = text.match(/Solved\s*\n*\s*([\d,]+)/i);
+                if (m) stats.solved = m[1].trim();
+            }
+
+            return { stats, html: body.innerHTML.substring(0, 10000), text: text.substring(0, 2000) };
         });
 
-        console.log('[picoctf-scraper] Scraped stats:', stats);
+        console.log('[picoctf-scraper] Scraped Result:', result.stats);
 
-        if (stats.score || stats.rank || stats.solved) {
-            fs.writeFileSync('picoctf-stats.json', JSON.stringify(stats, null, 2));
-            console.log('[picoctf-scraper] Wrote picoctf-stats.json');
+        if (result.stats.score || result.stats.rank || result.stats.solved) {
+            fs.writeFileSync('picoctf-stats.json', JSON.stringify(result.stats, null, 2));
+            console.log('[picoctf-scraper] SUCCESS: Wrote picoctf-stats.json');
         } else {
-            console.error('[picoctf-scraper] Could not find stats on page. Check if elements changed.');
+            console.error('[picoctf-scraper] FAILURE: Could not find stats. Page content follows:');
+            console.log('--- TEXT CONTENT ---');
+            console.log(result.text);
+            console.log('--- END TEXT CONTENT ---');
         }
 
     } catch (error) {
-        console.error('[picoctf-scraper] Error during scraping:', error);
+        console.error('[picoctf-scraper] CRITICAL ERROR:', error.message);
     } finally {
         await browser.close();
     }
