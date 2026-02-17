@@ -1,19 +1,21 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
 
+puppeteer.use(StealthPlugin());
+
 async function scrapePicoCTF(username) {
-    console.log(`[picoctf-scraper] Starting Puppeteer scrape for: ${username}`);
+    console.log(`[picoctf-scraper] Starting stealth scrape for: ${username}`);
     const stats = { score: null, rank: null, solved: null };
 
     const browser = await puppeteer.launch({
         headless: "new",
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-blink-features=AutomationControlled']
     });
 
     try {
         const page = await browser.newPage();
         await page.setViewport({ width: 1280, height: 800 });
-        await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36");
 
         const url = `https://play.picoctf.org/users/${username}`;
         console.log(`[picoctf-scraper] Navigating to: ${url}`);
@@ -21,8 +23,8 @@ async function scrapePicoCTF(username) {
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 90000 });
 
         // Wait for potential splash screens or SPA loading
-        console.log("[picoctf-scraper] Waiting 20s for content...");
-        await new Promise(r => setTimeout(r, 20000));
+        console.log("[picoctf-scraper] Waiting 30s for content...");
+        await new Promise(r => setTimeout(r, 30000));
 
         const data = await page.evaluate(() => {
             const result = { score: null, rank: null, solved: null };
@@ -37,7 +39,7 @@ async function scrapePicoCTF(username) {
             if (rankMatch) result.rank = rankMatch[1].trim();
             if (solvedMatch) result.solved = solvedMatch[1].trim();
 
-            return { result, text: bodyText.substring(0, 2000) };
+            return { result, text: bodyText.substring(0, 1000) };
         });
 
         console.log('[picoctf-scraper] Scraped result:', data.result);

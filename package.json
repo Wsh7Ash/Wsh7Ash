@@ -5,9 +5,11 @@
   "main": "generate-readme.js",
   "scripts": {
     "generate": "node generate-readme.js",
-    "scrape-picoctf": "node picoctf-scraper.js"
+    "scrape-picoctf": "node picoctf-scraper.js spw"
   },
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^22.0.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
