@@ -138,6 +138,29 @@ jobs:
           config_padding: "0, 8"
           extras_css: "h2 { display: none; }"
 
+      - name: Generate lines (clean)
+        uses: lowlighter/metrics@latest
+        with:
+          filename: "metrics.plugin.lines.clean.svg"
+          token: "${{ secrets.METRICS_TOKEN }}"
+          base: ""
+          plugin_lines: "yes"
+          config_optimize: "yes"
+          config_padding: "0, 8"
+          extras_css: "h2 { display: none; }"
+
+      - name: Generate followup (clean)
+        uses: lowlighter/metrics@latest
+        with:
+          filename: "metrics.plugin.followup.clean.svg"
+          token: "${{ secrets.METRICS_TOKEN }}"
+          base: ""
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories"
+          config_optimize: "yes"
+          config_padding: "0, 8"
+          extras_css: "h2 { display: none; }"
+
       # ──────────────────────────────────────────────
       #  Sync & Update README
       # ──────────────────────────────────────────────
