@@ -1,6 +1,15 @@
 # 📊 My Metrics & Stats
 
-<!-- picoCTF stats not found -->
+
+### 🚩 picoCTF Statistics
+| Attribute | Value |
+| :--- | :--- |
+| **World Rank** | N/A |
+| **Total Score** | 0 |
+| **Challenges Solved** | 29 |
+
+[View picoCTF Profile](https://play.picoctf.org/users/spw)
+
 
 <!-- plugin:isocalendar (clean) -->
 <img src="./metrics.plugin.isocalendar.fullyear.clean.svg" alt="Full-year Calendar">
