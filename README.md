@@ -1,11 +1,15 @@
 
+<!-- plugin:isocalendar (clean) -->
+<img src="./metrics.plugin.isocalendar.fullyear.clean.svg" alt="Full-year Calendar">
 
-<div align="center">
-  
-  ![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=F70000&center=true&vCenter=true&width=600&lines=Full+Stack+Developer;Game+Development+Enthusiast;Security+Researcher;Low-Level+Programming+Expert;Open+Source+Contributor)
-  
-</div>
+<!-- plugin:languages (clean) -->
+<img src="./metrics.plugin.languages.clean.svg" alt="Languages">
 
-## 🚀 About Me
-I'm a SkillIssue dev!!.
+<!-- plugin:leetcode (clean) -->
+<img src="./metrics.plugin.leetcode.clean.svg" alt="LeetCode">
 
+<!-- plugin:stars (clean) -->
+<img src="./metrics.plugin.stars.clean.svg" alt="Stars">
+
+<!-- plugin:achievements (clean) -->
+<img src="./metrics.plugin.achievements.clean.svg" alt="Achievements">

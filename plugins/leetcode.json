@@ -1,0 +1,14 @@
+{
+  "id": "leetcode",
+  "name": "LeetCode",
+  "description": "LeetCode problem-solving statistics",
+  "output": "metrics.plugin.leetcode.svg",
+  "enabled": true,
+  "use_clean": true,
+  "order": 3,
+  "config": {
+    "plugin_leetcode": "yes",
+    "plugin_leetcode_user": "Wsh7Ash",
+    "plugin_leetcode_sections": "solved, skills, recent"
+  }
+}

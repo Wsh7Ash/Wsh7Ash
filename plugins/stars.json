@@ -1,0 +1,13 @@
+{
+  "id": "stars",
+  "name": "Stars",
+  "description": "Stargazers statistics for repositories",
+  "output": "metrics.plugin.stars.svg",
+  "enabled": true,
+  "use_clean": true,
+  "order": 4,
+  "config": {
+    "plugin_stars": "yes",
+    "plugin_stars_limit": "4"
+  }
+}

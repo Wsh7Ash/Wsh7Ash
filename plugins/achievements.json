@@ -1,0 +1,14 @@
+{
+  "id": "achievements",
+  "name": "Achievements",
+  "description": "GitHub profile achievements display",
+  "output": "metrics.plugin.achievements.svg",
+  "enabled": true,
+  "use_clean": true,
+  "order": 5,
+  "config": {
+    "plugin_achievements": "yes",
+    "plugin_achievements_display": "compact",
+    "plugin_achievements_threshold": "C"
+  }
+}
