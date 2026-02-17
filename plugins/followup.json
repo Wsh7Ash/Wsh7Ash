@@ -4,7 +4,7 @@
   "description": "Repository counts and activity follow-up",
   "output": "metrics.plugin.followup.svg",
   "enabled": true,
-  "use_clean": true,
+  "use_clean": false,
   "order": 7,
   "config": {
     "plugin_followup": "yes",

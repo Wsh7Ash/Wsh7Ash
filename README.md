@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![picoCTF Profile](https://img.shields.io/badge/picoCTF-spw-red?style=for-the-badge&logo=picoctf)](https://play.picoctf.org/users/spw)
+[![picoCTF Profile](https://img.shields.io/badge/picoCTF-spw-red?style=for-the-badge&logo=ghost)](https://play.picoctf.org/users/spw)
 
 </div>
 
@@ -21,8 +21,8 @@
 <!-- plugin:achievements (clean) -->
 <img src="./metrics.plugin.achievements.clean.svg" alt="Achievements">
 
-<!-- plugin:lines (clean) -->
-<img src="./metrics.plugin.lines.clean.svg" alt="Lines of Code">
+<!-- plugin:lines  -->
+<img src="./metrics.plugin.lines.svg" alt="Lines of Code">
 
-<!-- plugin:followup (clean) -->
-<img src="./metrics.plugin.followup.clean.svg" alt="Follow-up">
+<!-- plugin:followup  -->
+<img src="./metrics.plugin.followup.svg" alt="Follow-up">
