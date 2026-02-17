@@ -1,5 +1,8 @@
 ![](https://komarev.com/ghpvc/?username=Wsh7Ash)
 
+# 📊 My Metrics & Stats
+
+
 ### 🚩 picoCTF Statistics
 | Attribute | Value |
 | :--- | :--- |
@@ -9,6 +12,9 @@
 
 [View picoCTF Profile](https://play.picoctf.org/users/spw)
 
+
+<!-- plugin:base  -->
+<img src="./metrics.base.svg" alt="Classic Stats">
 
 <!-- plugin:isocalendar (clean) -->
 <img src="./metrics.plugin.isocalendar.fullyear.clean.svg" alt="Full-year Calendar">

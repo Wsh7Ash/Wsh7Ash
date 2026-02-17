@@ -7,6 +7,8 @@
   "use_clean": false,
   "order": 0,
   "config": {
-    "base": "activity, community, repositories, metadata"
+    "base": "activity, community, repositories, metadata",
+    "base_indepth": "yes",
+    "base_sections": "header, activity, community, repositories, metadata"
   }
 }
