@@ -201,4 +201,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update metrics and README"
-          file_pattern: "*.svg README.md"
+          file_pattern: "*.svg README.md picoctf-stats.json"
