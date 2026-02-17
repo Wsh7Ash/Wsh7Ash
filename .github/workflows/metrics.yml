@@ -26,6 +26,7 @@ jobs:
 
       - name: Generate isocalendar
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.isocalendar.fullyear.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -212,21 +213,8 @@ jobs:
       - name: Generate README
         run: node generate-readme.js
 
-      - name: Debug Workspace
-        run: |
-          git status
-          git branch
-          git remote -v
-          echo "I was here" > I_WAS_HERE.txt
-          [ -f picoctf-stats.json ] && cat picoctf-stats.json || echo "stats file not found"
-
-      - name: Commit and Push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git status
-          git commit -m "chore: update metrics and README [skip ci]" || echo "No changes to commit"
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main --force
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update metrics and README"
+          file_pattern: "*.svg README.md picoctf-stats.json"

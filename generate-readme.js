@@ -1,41 +1,19 @@
-#!/usr/bin/env node
-/**
- * generate-readme.js
- *
- * Reads all plugin configs from plugins/*.json, sorts them by `order`,
- * filters enabled ones, and generates README.md from README.template.md.
- *
- * Usage:
- *   node generate-readme.js
- *
- * To add a new plugin:
- *   1. Create plugins/<id>.json with the standard schema
- *   2. Add the corresponding step in .github/workflows/metrics.yml
- *   3. Run this script (or let the CI do it)
- */
+const fs = require('fs');
+const path = require('path');
 
-const fs = require("fs");
-const path = require("path");
-
-const PLUGINS_DIR = path.join(__dirname, "plugins");
 const TEMPLATE = path.join(__dirname, "README.template.md");
 const OUTPUT = path.join(__dirname, "README.md");
+const PLUGINS_DIR = path.join(__dirname, "plugins");
 
-// ── Load & validate plugins ─────────────────────────────────────────
 function loadPlugins() {
-  const files = fs.readdirSync(PLUGINS_DIR).filter((f) => f.endsWith(".json"));
-  const plugins = files.map((f) => {
-    const raw = fs.readFileSync(path.join(PLUGINS_DIR, f), "utf8");
-    const plugin = JSON.parse(raw);
+  const plugins = [];
+  const files = fs.readdirSync(PLUGINS_DIR);
 
-    // Basic schema validation
-    const required = ["id", "name", "output", "enabled", "order", "config"];
-    for (const key of required) {
-      if (!(key in plugin)) {
-        throw new Error(`Plugin ${f} is missing required field: "${key}"`);
-      }
+  files.forEach((file) => {
+    if (file.endsWith(".json")) {
+      const p = JSON.parse(fs.readFileSync(path.join(PLUGINS_DIR, file), "utf8"));
+      plugins.push(p);
     }
-    return plugin;
   });
 
   return plugins
@@ -43,7 +21,6 @@ function loadPlugins() {
     .sort((a, b) => a.order - b.order);
 }
 
-// ── Render plugin section ───────────────────────────────────────────
 function renderPlugins(plugins) {
   return plugins
     .map((p) => {
