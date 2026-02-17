@@ -35,6 +35,7 @@ jobs:
 
       - name: Generate languages
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.languages.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -46,6 +47,7 @@ jobs:
 
       - name: Generate leetcode
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.leetcode.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -56,6 +58,7 @@ jobs:
 
       - name: Generate lines
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.lines.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -64,6 +67,7 @@ jobs:
 
       - name: Generate followup
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.followup.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -73,6 +77,7 @@ jobs:
 
       - name: Generate stars
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.stars.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -82,6 +87,7 @@ jobs:
 
       - name: Generate achievements
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.achievements.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -96,6 +102,7 @@ jobs:
 
       - name: Generate isocalendar (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.isocalendar.fullyear.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -108,6 +115,7 @@ jobs:
 
       - name: Generate languages (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.languages.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -122,6 +130,7 @@ jobs:
 
       - name: Generate leetcode (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.leetcode.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -135,6 +144,7 @@ jobs:
 
       - name: Generate stars (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.stars.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -147,6 +157,7 @@ jobs:
 
       - name: Generate achievements (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.achievements.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -160,6 +171,7 @@ jobs:
 
       - name: Generate lines (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.lines.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
@@ -171,6 +183,7 @@ jobs:
 
       - name: Generate followup (clean)
         uses: lowlighter/metrics@latest
+        continue-on-error: true
         with:
           filename: "metrics.plugin.followup.clean.svg"
           token: "${{ secrets.METRICS_TOKEN }}"
