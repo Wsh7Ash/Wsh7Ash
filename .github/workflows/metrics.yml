@@ -195,26 +195,5 @@ jobs:
           config_padding: "0, 8"
           extras_css: "h2 { display: none; }"
 
-      # ──────────────────────────────────────────────
-      #  Sync & Update README
-      # ──────────────────────────────────────────────
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Scrape picoCTF stats
-        run: node picoctf-scraper.js spw
-
-      - name: Generate README
-        run: node generate-readme.js
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update metrics and README"
-          file_pattern: "*.svg README.md picoctf-stats.json"
+      # No more manual commit here, let the action handle it if it wants, 
+      # or just rely on the separate picoctf.yml for the README.
