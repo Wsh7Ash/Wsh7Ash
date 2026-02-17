@@ -1,4 +1,4 @@
-# 📊 My Metrics & Stats
+![](https://komarev.com/ghpvc/?username=Wsh7Ash)
 
 
 ### 🚩 picoCTF Statistics
