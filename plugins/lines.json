@@ -1,0 +1,12 @@
+{
+  "id": "lines",
+  "name": "Lines of Code",
+  "description": "Cumulative lines of code changed across repositories",
+  "output": "metrics.plugin.lines.svg",
+  "enabled": true,
+  "use_clean": true,
+  "order": 6,
+  "config": {
+    "plugin_lines": "yes"
+  }
+}

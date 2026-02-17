@@ -5,6 +5,13 @@
 [![picoCTF Profile](https://img.shields.io/badge/picoCTF-spw-red?style=for-the-badge&logo=picoctf)](https://play.picoctf.org/users/spw)
 
 </div>
+# 📊 My Metrics & Stats
+
+<div align="center">
+
+[![picoCTF Profile](https://img.shields.io/badge/picoCTF-spw-red?style=for-the-badge&logo=picoctf)](https://play.picoctf.org/users/spw)
+
+</div>
 
 <!-- plugin:isocalendar (clean) -->
 <img src="./metrics.plugin.isocalendar.fullyear.clean.svg" alt="Full-year Calendar">
@@ -20,3 +27,9 @@
 
 <!-- plugin:achievements (clean) -->
 <img src="./metrics.plugin.achievements.clean.svg" alt="Achievements">
+
+<!-- plugin:lines (clean) -->
+<img src="./metrics.plugin.lines.clean.svg" alt="Lines of Code">
+
+<!-- plugin:followup (clean) -->
+<img src="./metrics.plugin.followup.clean.svg" alt="Follow-up">

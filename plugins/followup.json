@@ -1,0 +1,13 @@
+{
+  "id": "followup",
+  "name": "Follow-up",
+  "description": "Repository counts and activity follow-up",
+  "output": "metrics.plugin.followup.svg",
+  "enabled": true,
+  "use_clean": true,
+  "order": 7,
+  "config": {
+    "plugin_followup": "yes",
+    "plugin_followup_sections": "repositories"
+  }
+}
