@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const TEMPLATE = path.join(__dirname, "README.template.md");
-const OUTPUT = path.join(__dirname, "README.md");
-const PLUGINS_DIR = path.join(__dirname, "plugins");
+const ROOT_DIR = process.cwd();
+const TEMPLATE = path.join(ROOT_DIR, "README.template.md");
+const OUTPUT = path.join(ROOT_DIR, "README.md");
+const PLUGINS_DIR = path.join(ROOT_DIR, "plugins");
+const STATS_FILE = path.join(ROOT_DIR, "picoctf-stats.json");
 
 function loadPlugins() {
+  if (!fs.existsSync(PLUGINS_DIR)) return [];
   const plugins = [];
   const files = fs.readdirSync(PLUGINS_DIR);
 
@@ -33,14 +36,14 @@ function renderPlugins(plugins) {
     .join("\n\n");
 }
 
-// ── Render picoCTF section ──────────────────────────────────────────
 function renderPicoCTF() {
-  const statsFile = path.join(__dirname, "picoctf-stats.json");
-  if (!fs.existsSync(statsFile)) return "<!-- picoCTF stats not found -->";
+  console.log(`[generate-readme] Checking for stats file at: ${STATS_FILE}`);
+  if (!fs.existsSync(STATS_FILE)) {
+    console.log(`[generate-readme] Stats file NOT FOUND. Existing files: ${fs.readdirSync(ROOT_DIR).join(", ")}`);
+    return "<!-- picoCTF stats not found -->";
+  }
 
-  const stats = JSON.parse(fs.readFileSync(statsFile, "utf8"));
-  if (!stats.score && !stats.rank && !stats.solved) return "<!-- picoCTF stats empty -->";
-
+  const stats = JSON.parse(fs.readFileSync(STATS_FILE, "utf8"));
   return `
 ### 🚩 picoCTF Statistics
 | Attribute | Value |
@@ -53,12 +56,9 @@ function renderPicoCTF() {
 `;
 }
 
-// ── Main ────────────────────────────────────────────────────────────
 function main() {
+  console.log(`[generate-readme] CWD: ${process.cwd()}`);
   const plugins = loadPlugins();
-  console.log(`[generate-readme] Found ${plugins.length} enabled plugin(s):`);
-  plugins.forEach((p) => console.log(`  • ${p.id} (order: ${p.order})`));
-
   const template = fs.readFileSync(TEMPLATE, "utf8");
   let rendered = template.replace("{{PLUGINS}}", renderPlugins(plugins));
   rendered = rendered.replace("{{PICOCTF_STATS}}", renderPicoCTF());
