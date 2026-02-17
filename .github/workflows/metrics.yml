@@ -199,11 +199,12 @@ jobs:
       - name: Debug Workspace
         run: |
           ls -R
+          echo "I was here" > I_WAS_HERE.txt
           [ -f picoctf-stats.json ] && cat picoctf-stats.json || echo "stats file not found"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update metrics and README"
-          file_pattern: "*.svg README.md picoctf-stats.json"
-          add_options: "-f"
+          file_pattern: "*.svg README.md picoctf-stats.json I_WAS_HERE.txt"
+          add_options: "-A"
