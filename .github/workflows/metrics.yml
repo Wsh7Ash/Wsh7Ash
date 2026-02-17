@@ -48,7 +48,7 @@ jobs:
           token: "${{ secrets.METRICS_TOKEN }}"
           base: ""
           plugin_leetcode: "yes"
-          plugin_leetcode_user: "Wsh7Ash"
+          plugin_leetcode_user: "vOF31ss21z"
           plugin_leetcode_sections: "solved, skills, recent"
 
       - name: Generate stars
@@ -107,7 +107,7 @@ jobs:
           token: "${{ secrets.METRICS_TOKEN }}"
           base: ""
           plugin_leetcode: "yes"
-          plugin_leetcode_user: "Wsh7Ash"
+          plugin_leetcode_user: "vOF31ss21z"
           plugin_leetcode_sections: "solved, skills, recent"
           config_optimize: "yes"
           config_padding: "0, 8"
