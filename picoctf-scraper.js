@@ -45,17 +45,18 @@ async function scrapePicoCTF(username) {
         console.log('[picoctf-scraper] Scraped result:', data.result);
 
         if (data.result.score || data.result.rank || data.result.solved) {
+            data.result.last_updated = new Date().toISOString();
             fs.writeFileSync('picoctf-stats.json', JSON.stringify(data.result, null, 2));
             console.log('[picoctf-scraper] SUCCESS: Data saved.');
         } else {
             console.error('[picoctf-scraper] FAILURE: No stats found. Text preview:');
             console.log(data.text);
-            fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "N/A", rank: "Hidden", solved: "N/A" }, null, 2));
+            fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "N/A", rank: "Hidden", solved: "N/A", last_updated: new Date().toISOString() }, null, 2));
         }
 
     } catch (error) {
         console.error('[picoctf-scraper] CRITICAL ERROR:', error.message);
-        fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "Error", rank: error.message, solved: "Error" }, null, 2));
+        fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "Error", rank: error.message, solved: "Error", last_updated: new Date().toISOString() }, null, 2));
     } finally {
         await browser.close();
     }
