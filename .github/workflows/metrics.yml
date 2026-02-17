@@ -197,10 +197,13 @@ jobs:
         run: node generate-readme.js
 
       - name: Debug Workspace
-        run: ls -R
+        run: |
+          ls -R
+          [ -f picoctf-stats.json ] && cat picoctf-stats.json || echo "stats file not found"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update metrics and README"
           file_pattern: "*.svg README.md picoctf-stats.json"
+          add_options: "-f"
