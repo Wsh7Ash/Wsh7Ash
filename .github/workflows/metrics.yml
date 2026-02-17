@@ -17,17 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Scrape picoCTF stats
-        run: node picoctf-scraper.js spw
-
       # ──────────────────────────────────────────────
       #  Normal Versions
       # ──────────────────────────────────────────────
@@ -193,8 +182,22 @@ jobs:
       #  Sync & Update README
       # ──────────────────────────────────────────────
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Scrape picoCTF stats
+        run: node picoctf-scraper.js spw
+
       - name: Generate README
         run: node generate-readme.js
+
+      - name: Debug Workspace
+        run: ls -R
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
