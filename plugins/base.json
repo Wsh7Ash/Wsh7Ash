@@ -1,0 +1,12 @@
+{
+  "id": "base",
+  "name": "Classic Stats",
+  "description": "General activity and repository counts",
+  "output": "metrics.base.svg",
+  "enabled": true,
+  "use_clean": false,
+  "order": 0,
+  "config": {
+    "base": "activity, community, repositories, metadata"
+  }
+}

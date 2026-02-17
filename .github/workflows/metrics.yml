@@ -21,6 +21,18 @@ jobs:
           fetch-depth: 0
 
       # ──────────────────────────────────────────────
+      #  Classic Stats
+      # ──────────────────────────────────────────────
+
+      - name: Generate base metrics
+        uses: lowlighter/metrics@latest
+        continue-on-error: true
+        with:
+          filename: "metrics.base.svg"
+          token: "${{ secrets.METRICS_TOKEN }}"
+          base: "activity, community, repositories, metadata"
+
+      # ──────────────────────────────────────────────
       #  Normal Versions
       # ──────────────────────────────────────────────
 
@@ -195,5 +207,23 @@ jobs:
           config_padding: "0, 8"
           extras_css: "h2 { display: none; }"
 
-      # No more manual commit here, let the action handle it if it wants, 
-      # or just rely on the separate picoctf.yml for the README.
+      # ──────────────────────────────────────────────
+      #  Sync & Update README
+      # ──────────────────────────────────────────────
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate README
+        run: node generate-readme.js
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update metrics and README [skip ci]"
+          file_pattern: "*.svg README.md"
