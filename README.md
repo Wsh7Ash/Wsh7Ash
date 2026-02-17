@@ -14,25 +14,25 @@
 
 
 <!-- plugin:base  -->
-<img src="./metrics.base.svg" alt="Classic Stats">
+![Classic Stats](metrics.base.svg)
 
 <!-- plugin:isocalendar (clean) -->
-<img src="./metrics.plugin.isocalendar.fullyear.clean.svg" alt="Full-year Calendar">
+![Full-year Calendar](metrics.plugin.isocalendar.fullyear.clean.svg)
 
 <!-- plugin:languages (clean) -->
-<img src="./metrics.plugin.languages.clean.svg" alt="Languages">
+![Languages](metrics.plugin.languages.clean.svg)
 
 <!-- plugin:leetcode (clean) -->
-<img src="./metrics.plugin.leetcode.clean.svg" alt="LeetCode">
+![LeetCode](metrics.plugin.leetcode.clean.svg)
 
 <!-- plugin:stars (clean) -->
-<img src="./metrics.plugin.stars.clean.svg" alt="Stars">
+![Stars](metrics.plugin.stars.clean.svg)
 
 <!-- plugin:achievements (clean) -->
-<img src="./metrics.plugin.achievements.clean.svg" alt="Achievements">
+![Achievements](metrics.plugin.achievements.clean.svg)
 
 <!-- plugin:lines  -->
-<img src="./metrics.plugin.lines.svg" alt="Lines of Code">
+![Lines of Code](metrics.plugin.lines.svg)
 
 <!-- plugin:followup  -->
-<img src="./metrics.plugin.followup.svg" alt="Follow-up">
+![Follow-up](metrics.plugin.followup.svg)

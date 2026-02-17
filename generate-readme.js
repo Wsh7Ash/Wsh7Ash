@@ -31,7 +31,7 @@ function renderPlugins(plugins) {
       if (p.use_clean) {
         filename = filename.replace(".svg", ".clean.svg");
       }
-      return `<!-- plugin:${p.id} ${p.use_clean ? "(clean)" : ""} -->\n<img src="./${filename}" alt="${p.name}">`;
+      return `<!-- plugin:${p.id} ${p.use_clean ? "(clean)" : ""} -->\n![${p.name}](${filename})`;
     })
     .join("\n\n");
 }
