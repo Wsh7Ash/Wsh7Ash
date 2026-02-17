@@ -56,6 +56,26 @@ function renderPlugins(plugins) {
     .join("\n\n");
 }
 
+// ── Render picoCTF section ──────────────────────────────────────────
+function renderPicoCTF() {
+  const statsFile = path.join(__dirname, "picoctf-stats.json");
+  if (!fs.existsSync(statsFile)) return "<!-- picoCTF stats not found -->";
+
+  const stats = JSON.parse(fs.readFileSync(statsFile, "utf8"));
+  if (!stats.score && !stats.rank && !stats.solved) return "<!-- picoCTF stats empty -->";
+
+  return `
+### 🚩 picoCTF Statistics
+| Attribute | Value |
+| :--- | :--- |
+| **World Rank** | ${stats.rank || "N/A"} |
+| **Total Score** | ${stats.score || "0"} |
+| **Challenges Solved** | ${stats.solved || "0"} |
+
+[View picoCTF Profile](https://play.picoctf.org/users/spw)
+`;
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 function main() {
   const plugins = loadPlugins();
@@ -63,7 +83,8 @@ function main() {
   plugins.forEach((p) => console.log(`  • ${p.id} (order: ${p.order})`));
 
   const template = fs.readFileSync(TEMPLATE, "utf8");
-  const rendered = template.replace("{{PLUGINS}}", renderPlugins(plugins));
+  let rendered = template.replace("{{PLUGINS}}", renderPlugins(plugins));
+  rendered = rendered.replace("{{PICOCTF_STATS}}", renderPicoCTF());
 
   fs.writeFileSync(OUTPUT, rendered, "utf8");
   console.log(`[generate-readme] Wrote ${OUTPUT}`);

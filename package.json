@@ -1,0 +1,13 @@
+{
+  "name": "github-metrics",
+  "version": "1.0.0",
+  "description": "GitHub Metrics and Profile Stats",
+  "main": "generate-readme.js",
+  "scripts": {
+    "generate": "node generate-readme.js",
+    "scrape-picoctf": "node picoctf-scraper.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
