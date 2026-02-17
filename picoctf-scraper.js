@@ -10,18 +10,27 @@ async function scrapePicoCTF(username) {
         console.log(`[picoctf-scraper] Trying HTML: ${htmlUrl}`);
 
         const htmlData = await new Promise((resolve, reject) => {
-            https.get(htmlUrl, {
+            const req = https.get(htmlUrl, {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
                 }
             }, (res) => {
                 console.log(`[picoctf-scraper] HTML Fetch Status: ${res.statusCode}`);
+                if (res.statusCode >= 400) {
+                    reject(new Error(`HTTP ${res.statusCode}`));
+                    return;
+                }
                 let data = '';
                 res.on('data', (chunk) => data += chunk);
                 res.on('end', () => resolve(data));
-            }).on('error', (err) => {
+            });
+            req.on('error', (err) => {
                 console.error(`[picoctf-scraper] Fetch Error: ${err.message}`);
                 reject(err);
+            });
+            req.setTimeout(30000, () => {
+                req.destroy();
+                reject(new Error('Timeout after 30s'));
             });
         });
 
@@ -40,15 +49,15 @@ async function scrapePicoCTF(username) {
 
         if (stats.score || stats.rank || stats.solved) {
             fs.writeFileSync('picoctf-stats.json', JSON.stringify(stats, null, 2));
-            console.log('[picoctf-scraper] SUCCESS: Data saved to picoctf-stats.json');
+            console.log('[picoctf-scraper] SUCCESS: Data saved.');
         } else {
-            console.error('[picoctf-scraper] FAILURE: No stats found in HTML.');
-            // Save a dummy payload so the README generator doesn't fail silently
+            console.error('[picoctf-scraper] FAILURE: No stats found in HTML strings.');
             fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "N/A", rank: "N/A", solved: "N/A" }, null, 2));
         }
 
     } catch (error) {
         console.error('[picoctf-scraper] CRITICAL ERROR:', error.message);
+        fs.writeFileSync('picoctf-stats.json', JSON.stringify({ score: "Error", rank: error.message, solved: "Error" }, null, 2));
     }
 }
 
