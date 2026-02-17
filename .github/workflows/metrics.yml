@@ -51,6 +51,23 @@ jobs:
           plugin_leetcode_user: "vOF31ss21z"
           plugin_leetcode_sections: "solved, skills, recent"
 
+      - name: Generate lines
+        uses: lowlighter/metrics@latest
+        with:
+          filename: "metrics.plugin.lines.svg"
+          token: "${{ secrets.METRICS_TOKEN }}"
+          base: ""
+          plugin_lines: "yes"
+
+      - name: Generate followup
+        uses: lowlighter/metrics@latest
+        with:
+          filename: "metrics.plugin.followup.svg"
+          token: "${{ secrets.METRICS_TOKEN }}"
+          base: ""
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories"
+
       - name: Generate stars
         uses: lowlighter/metrics@latest
         with:
