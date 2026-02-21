@@ -1,7 +1,5 @@
 ![](https://komarev.com/ghpvc/?username=Wsh7Ash)
 
-
-
 <!-- Banner -->
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Welcome%20to%20Zero!&fontSize=40&fontAlignY=35&animation=twinkling" width="100%"/>
@@ -69,6 +67,9 @@
   <img src="https://streak-stats.demolab.com?user=Wsh7Ash&theme=tokyonight&hide_border=true" height="165"/>
 </div>
 
+
+# 📊 My Metrics & Stats
+
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/no12354manz)
 
 
@@ -105,8 +106,6 @@
 
 <!-- plugin:followup  -->
 ![Follow-up](metrics.plugin.followup.svg)
-
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/no12354manz)
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%"/>
