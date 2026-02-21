@@ -6,9 +6,9 @@
 ### 🚩 picoCTF Statistics
 | Attribute | Value |
 | :--- | :--- |
-| **World Rank** | Hidden |
-| **Total Score** | N/A |
-| **Challenges Solved** | N/A |
+| **World Rank** | N/A |
+| **Total Score** | 0 |
+| **Challenges Solved** | 29 |
 
 [View picoCTF Profile](https://play.picoctf.org/users/spw)
 
