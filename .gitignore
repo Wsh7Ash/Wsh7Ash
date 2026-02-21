@@ -1,6 +1,7 @@
 node_modules/
 package-lock.json
 *.svg
+!metrics.base.svg
 !metrics.plugin.isocalendar.fullyear.clean.svg
 !metrics.plugin.languages.clean.svg
 !metrics.plugin.leetcode.clean.svg
@@ -8,3 +9,4 @@ package-lock.json
 !metrics.plugin.achievements.clean.svg
 !metrics.plugin.lines.svg
 !metrics.plugin.followup.svg
+!picoctf-stats.json
