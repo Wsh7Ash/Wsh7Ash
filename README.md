@@ -78,7 +78,7 @@
 | :--- | :--- |
 | **World Rank** | N/A |
 | **Total Score** | 0 |
-| **Challenges Solved** | 29 |
+| **Challenges Solved** | 30 |
 
 [View picoCTF Profile](https://play.picoctf.org/users/spw)
 
