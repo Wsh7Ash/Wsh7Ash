@@ -70,7 +70,7 @@
 
 # 📊 My Metrics & Stats
 
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/no12354manz)
+
 
 
 ### 🚩 picoCTF Statistics
@@ -78,7 +78,7 @@
 | :--- | :--- |
 | **World Rank** | N/A |
 | **Total Score** | 0 |
-| **Challenges Solved** | 30 |
+| **Challenges Solved** | 31 |
 
 [View picoCTF Profile](https://play.picoctf.org/users/spw)
 
@@ -107,10 +107,8 @@
 <!-- plugin:followup  -->
 ![Follow-up](metrics.plugin.followup.svg)
 
-
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/no12354manz)
 [![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white)](bitcoin:bc1qqjpr30gpv2yvzmfwxalyg4w4nd6zalt4407am7)
-
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%"/>
