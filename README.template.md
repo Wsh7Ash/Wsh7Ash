@@ -71,6 +71,7 @@
 # 📊 My Metrics & Stats
 
 
+{{PLUGINS}}
 
 {{PICOCTF_STATS}}
 
