@@ -21,7 +21,7 @@ jobs:
         run: npm install
         
       - name: Scrape picoCTF stats
-        run: node picoctf-scraper.js spw
+        run: node picoctf-scraper.js
         
       - name: Generate README
         run: node generate-readme.js

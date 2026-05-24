@@ -1,21 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-
-const DEFAULT_CONFIG = {
-  github_username: "Wsh7Ash",
-  picoctf_username: "spw",
-  leetcode_username: "vOF31ss21z"
-};
+const { DEFAULT_CONFIG, loadProfileConfig } = require("./profile-config");
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
-}
-
-function loadProfileConfig(rootDir) {
-  const configPath = path.join(rootDir, "profile.config.json");
-  if (!fs.existsSync(configPath)) return { ...DEFAULT_CONFIG };
-
-  return { ...DEFAULT_CONFIG, ...readJson(configPath) };
 }
 
 function validateTemplate(template, placeholders, templateName = "README.template.md") {

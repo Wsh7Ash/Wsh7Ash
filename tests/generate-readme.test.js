@@ -46,6 +46,39 @@ test("README template keeps the plugins placeholder", () => {
   assert.match(template, /\{\{PLUGINS\}\}/);
 });
 
+test("README template uses the configured GitHub username placeholder", () => {
+  const template = fs.readFileSync(path.join(ROOT_DIR, "README.template.md"), "utf8");
+
+  assert.match(template, /\{\{GITHUB_USERNAME\}\}/);
+  assert.doesNotMatch(template, /username=Wsh7Ash/);
+  assert.doesNotMatch(template, /user=Wsh7Ash/);
+});
+
+test("repository stores default profile usernames in config", () => {
+  const config = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "profile.config.json"), "utf8"));
+
+  assert.deepEqual(config, {
+    github_username: "Wsh7Ash",
+    picoctf_username: "spw",
+    leetcode_username: "vOF31ss21z"
+  });
+});
+
+test("profile config loader merges configured usernames with defaults", () => {
+  const { loadProfileConfig } = require("../profile-config");
+  const dir = createFixture();
+  fs.writeFileSync(
+    path.join(dir, "profile.config.json"),
+    JSON.stringify({ github_username: "ExampleGitHub", picoctf_username: "ExamplePico" }, null, 2)
+  );
+
+  assert.deepEqual(loadProfileConfig(dir), {
+    github_username: "ExampleGitHub",
+    picoctf_username: "ExamplePico",
+    leetcode_username: "vOF31ss21z"
+  });
+});
+
 test("generator fails when the plugins placeholder is missing", () => {
   const dir = createFixture();
   fs.writeFileSync(path.join(dir, "README.template.md"), "{{PICOCTF_STATS}}\n", "utf8");
@@ -71,4 +104,32 @@ test("generator fails on invalid enabled plugin config", () => {
 
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Invalid plugin config in bad\.json: missing name, output/);
+});
+
+test("generator renders configured GitHub and picoCTF usernames", () => {
+  const dir = createFixture();
+  fs.writeFileSync(
+    path.join(dir, "README.template.md"),
+    "github={{GITHUB_USERNAME}}\n{{PLUGINS}}\n{{PICOCTF_STATS}}\n",
+    "utf8"
+  );
+  fs.writeFileSync(
+    path.join(dir, "profile.config.json"),
+    JSON.stringify(
+      {
+        github_username: "ExampleGitHub",
+        picoctf_username: "ExamplePico",
+        leetcode_username: "ExampleLeet"
+      },
+      null,
+      2
+    )
+  );
+
+  const result = runGenerator(dir);
+  const rendered = fs.readFileSync(path.join(dir, "README.md"), "utf8");
+
+  assert.equal(result.status, 0);
+  assert.match(rendered, /github=ExampleGitHub/);
+  assert.match(rendered, /https:\/\/play\.picoctf\.org\/users\/ExamplePico/);
 });

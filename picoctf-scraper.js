@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
+const { loadPicoCTFUsername } = require('./profile-config');
 
 puppeteer.use(StealthPlugin());
 
@@ -62,5 +63,11 @@ async function scrapePicoCTF(username) {
     }
 }
 
-const user = process.argv[2] || 'spw';
-scrapePicoCTF(user);
+if (require.main === module) {
+    const user = process.argv[2] || loadPicoCTFUsername();
+    scrapePicoCTF(user);
+}
+
+module.exports = {
+    scrapePicoCTF
+};

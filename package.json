@@ -5,7 +5,7 @@
   "main": "generate-readme.js",
   "scripts": {
     "generate": "node generate-readme.js",
-    "scrape-picoctf": "node picoctf-scraper.js spw",
+    "scrape-picoctf": "node picoctf-scraper.js",
     "test": "node --test"
   },
   "dependencies": {
