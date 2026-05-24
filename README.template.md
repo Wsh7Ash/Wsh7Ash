@@ -5,6 +5,17 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Welcome%20to%20Zero!&fontSize=40&fontAlignY=35&animation=twinkling" width="100%"/>
 </div>
 
+<p align="center">
+  I build low-level systems, custom C++ game tech, and security-oriented tools.
+</p>
+
+## Current Focus
+
+- Building a custom C++ game engine and runtime tooling.
+- Developing custom C++ games with engine-level control.
+- Studying reverse engineering, binary internals, and security research.
+- Working close to graphics, memory, performance, and native tooling.
+
 ---
 
 ## 🚀 Tech Stack & Tools

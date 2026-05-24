@@ -54,6 +54,18 @@ test("README template uses the configured GitHub username placeholder", () => {
   assert.doesNotMatch(template, /user=Wsh7Ash/);
 });
 
+test("README template presents hacker systems and custom engine focus", () => {
+  const template = fs.readFileSync(path.join(ROOT_DIR, "README.template.md"), "utf8");
+
+  assert.match(template, /low-level systems/i);
+  assert.match(template, /custom C\+\+ game tech/i);
+  assert.match(template, /security-oriented tools/i);
+  assert.match(template, /## Current Focus/);
+  assert.match(template, /custom C\+\+ game engine/i);
+  assert.match(template, /C\+\+ games/i);
+  assert.match(template, /reverse engineering/i);
+});
+
 test("repository stores default profile usernames in config", () => {
   const config = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "profile.config.json"), "utf8"));
 
