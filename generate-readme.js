@@ -1,49 +1,77 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const ROOT_DIR = process.cwd();
-const TEMPLATE = path.join(ROOT_DIR, "README.template.md");
-const OUTPUT = path.join(ROOT_DIR, "README.md");
-const PLUGINS_DIR = path.join(ROOT_DIR, "plugins");
-const STATS_FILE = path.join(ROOT_DIR, "picoctf-stats.json");
+const DEFAULT_CONFIG = {
+  github_username: "Wsh7Ash",
+  picoctf_username: "spw",
+  leetcode_username: "vOF31ss21z"
+};
 
-function loadPlugins() {
-  if (!fs.existsSync(PLUGINS_DIR)) return [];
-  const plugins = [];
-  const files = fs.readdirSync(PLUGINS_DIR);
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
 
-  files.forEach((file) => {
-    if (file.endsWith(".json")) {
-      const p = JSON.parse(fs.readFileSync(path.join(PLUGINS_DIR, file), "utf8"));
-      plugins.push(p);
+function loadProfileConfig(rootDir) {
+  const configPath = path.join(rootDir, "profile.config.json");
+  if (!fs.existsSync(configPath)) return { ...DEFAULT_CONFIG };
+
+  return { ...DEFAULT_CONFIG, ...readJson(configPath) };
+}
+
+function validateTemplate(template, placeholders, templateName = "README.template.md") {
+  for (const placeholder of placeholders) {
+    if (!template.includes(placeholder)) {
+      throw new Error(`${templateName} is missing required placeholder: ${placeholder}`);
     }
+  }
+}
+
+function validatePlugin(plugin, file) {
+  if (!plugin.enabled) return;
+
+  const missing = ["id", "name", "output", "order"].filter((field) => {
+    return plugin[field] === undefined || plugin[field] === null || plugin[field] === "";
   });
 
-  return plugins
-    .filter((p) => p.enabled)
+  if (missing.length > 0) {
+    throw new Error(`Invalid plugin config in ${file}: missing ${missing.join(", ")}`);
+  }
+}
+
+function loadPlugins(rootDir) {
+  const pluginsDir = path.join(rootDir, "plugins");
+  if (!fs.existsSync(pluginsDir)) return [];
+
+  return fs
+    .readdirSync(pluginsDir)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => {
+      const plugin = readJson(path.join(pluginsDir, file));
+      validatePlugin(plugin, file);
+      return plugin;
+    })
+    .filter((plugin) => plugin.enabled)
     .sort((a, b) => a.order - b.order);
 }
 
 function renderPlugins(plugins) {
   return plugins
-    .map((p) => {
-      let filename = p.output;
-      if (p.use_clean) {
-        filename = filename.replace(".svg", ".clean.svg");
-      }
-      return `<!-- plugin:${p.id} ${p.use_clean ? "(clean)" : ""} -->\n![${p.name}](${filename})`;
+    .map((plugin) => {
+      const filename = plugin.use_clean
+        ? plugin.output.replace(".svg", ".clean.svg")
+        : plugin.output;
+      return `<!-- plugin:${plugin.id} ${plugin.use_clean ? "(clean)" : ""} -->\n![${plugin.name}](${filename})`;
     })
     .join("\n\n");
 }
 
-function renderPicoCTF() {
-  console.log(`[generate-readme] Checking for stats file at: ${STATS_FILE}`);
-  if (!fs.existsSync(STATS_FILE)) {
-    console.log(`[generate-readme] Stats file NOT FOUND. Existing files: ${fs.readdirSync(ROOT_DIR).join(", ")}`);
+function renderPicoCTF(rootDir, config) {
+  const statsFile = path.join(rootDir, "picoctf-stats.json");
+  if (!fs.existsSync(statsFile)) {
     return "<!-- picoCTF stats not found -->";
   }
 
-  const stats = JSON.parse(fs.readFileSync(STATS_FILE, "utf8"));
+  const stats = readJson(statsFile);
   return `
 ### 🚩 picoCTF Statistics
 | Attribute | Value |
@@ -52,19 +80,60 @@ function renderPicoCTF() {
 | **Total Score** | ${stats.score || "0"} |
 | **Challenges Solved** | ${stats.solved || "0"} |
 
-[View picoCTF Profile](https://play.picoctf.org/users/spw)
+[View picoCTF Profile](https://play.picoctf.org/users/${config.picoctf_username})
 `;
 }
 
-function main() {
-  console.log(`[generate-readme] CWD: ${process.cwd()}`);
-  const plugins = loadPlugins();
-  const template = fs.readFileSync(TEMPLATE, "utf8");
-  let rendered = template.replace("{{PLUGINS}}", renderPlugins(plugins));
-  rendered = rendered.replace("{{PICOCTF_STATS}}", renderPicoCTF());
-
-  fs.writeFileSync(OUTPUT, rendered, "utf8");
-  console.log(`[generate-readme] Wrote ${OUTPUT}`);
+function replaceAll(rendered, replacements) {
+  let output = rendered;
+  for (const [placeholder, value] of Object.entries(replacements)) {
+    output = output.split(placeholder).join(value);
+  }
+  return output;
 }
 
-main();
+function generateReadme({ rootDir = process.cwd(), write = true } = {}) {
+  const templatePath = path.join(rootDir, "README.template.md");
+  const outputPath = path.join(rootDir, "README.md");
+  const template = fs.readFileSync(templatePath, "utf8");
+  const config = loadProfileConfig(rootDir);
+
+  validateTemplate(template, ["{{PLUGINS}}", "{{PICOCTF_STATS}}"]);
+
+  const rendered = replaceAll(template, {
+    "{{GITHUB_USERNAME}}": config.github_username,
+    "{{PLUGINS}}": renderPlugins(loadPlugins(rootDir)),
+    "{{PICOCTF_STATS}}": renderPicoCTF(rootDir, config)
+  });
+
+  if (write) {
+    fs.writeFileSync(outputPath, rendered, "utf8");
+  }
+
+  return rendered;
+}
+
+function main() {
+  const outputPath = path.join(process.cwd(), "README.md");
+  generateReadme();
+  console.log(`[generate-readme] Wrote ${outputPath}`);
+}
+
+module.exports = {
+  DEFAULT_CONFIG,
+  generateReadme,
+  loadPlugins,
+  loadProfileConfig,
+  renderPicoCTF,
+  renderPlugins,
+  validateTemplate
+};
+
+if (require.main === module) {
+  try {
+    main();
+  } catch (error) {
+    console.error(`[generate-readme] ${error.message}`);
+    process.exitCode = 1;
+  }
+}
