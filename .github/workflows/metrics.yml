@@ -29,7 +29,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.base.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: "activity, community, repositories, metadata"
 
       # ──────────────────────────────────────────────
@@ -41,7 +41,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.isocalendar.fullyear.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_isocalendar: "yes"
           plugin_isocalendar_duration: "full-year"
@@ -51,7 +51,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.languages.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_languages: "yes"
           plugin_languages_ignored: "html, css"
@@ -63,7 +63,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.leetcode.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_leetcode: "yes"
           plugin_leetcode_user: "${{ vars.LEETCODE_USER || 'vOF31ss21z' }}"
@@ -74,7 +74,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.lines.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_lines: "yes"
 
@@ -83,7 +83,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.followup.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_followup: "yes"
           plugin_followup_sections: "repositories"
@@ -93,7 +93,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.stars.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_stars: "yes"
           plugin_stars_limit: 4
@@ -103,7 +103,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.achievements.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_achievements: "yes"
           plugin_achievements_display: "compact"
@@ -118,7 +118,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.isocalendar.fullyear.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_isocalendar: "yes"
           plugin_isocalendar_duration: "full-year"
@@ -131,7 +131,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.languages.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_languages: "yes"
           plugin_languages_ignored: "html, css"
@@ -146,7 +146,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.leetcode.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_leetcode: "yes"
           plugin_leetcode_user: "${{ vars.LEETCODE_USER || 'vOF31ss21z' }}"
@@ -160,7 +160,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.stars.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_stars: "yes"
           plugin_stars_limit: 4
@@ -173,7 +173,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.achievements.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_achievements: "yes"
           plugin_achievements_display: "compact"
@@ -187,7 +187,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.lines.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_lines: "yes"
           config_optimize: "yes"
@@ -199,7 +199,7 @@ jobs:
         continue-on-error: true
         with:
           filename: "metrics.plugin.followup.clean.svg"
-          token: "${{ secrets.METRICS_TOKEN }}"
+          token: "${{ secrets.METRICS_TOKEN || github.token }}"
           base: ""
           plugin_followup: "yes"
           plugin_followup_sections: "repositories"
