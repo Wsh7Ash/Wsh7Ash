@@ -122,6 +122,8 @@
 [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/noman12354)
 [![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white)](bitcoin:bc1qqjpr30gpv2yvzmfwxalyg4w4nd6zalt4407am7)
 
+[<img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" width="160">](https://patreon.com/Wsh7Ash752?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink)
+
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%"/>
 </div>
