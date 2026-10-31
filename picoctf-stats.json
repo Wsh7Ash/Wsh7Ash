@@ -1,6 +1,6 @@
 {
-  "score": "N/A",
-  "rank": "Hidden",
-  "solved": "N/A",
-  "last_updated": "2026-07-03T20:32:57.596Z"
+  "score": "Error",
+  "rank": "net::ERR_NAME_NOT_RESOLVED at https://play.picoctf.org/users/spw",
+  "solved": "Error",
+  "last_updated": "2026-10-31T11:24:46.612Z"
 }
